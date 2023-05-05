@@ -2,7 +2,7 @@
 
 <html>
     <head>
-        <title>sigh up</title>
+        <title>log in</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="myStyle.css">
@@ -11,29 +11,67 @@
     <body>
         <div class="signup">
             <div class="signupInner">
-                <form>
+                <form id="login">
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp">
 
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1">
+                        <input type="password" class="form-control"  name="password" id="exampleInputPassword1">
                     </div>
 
                     <button type="submit" class="btn btn-primary">Log In</button>
-                    <br>
-                    <br>
-                    
-                    <p style="text-align: center">new user ? <a><a href="./signup.html" target="target">sign up here</a></p>
                 </form>
+                <br>
+                <p style="text-align: center">new user ? <a><a href="./signup.html">sign up here</a></p>
             </div>
         </div>
 
         <script src="./myJs.js"></script>
+        <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
+
+        <<script>
+            $(document).ready(function () {
+                console.log("loaded........")
+                $('#login').on('submit', function (event) {
+                    event.preventDefault();
+                    let form = new FormData(this);
+                    console.log(form)
+                    
+                    $.ajax({
+                        url: "loginServelet",
+                        type: 'POST',
+                        data: form,
+                        success: function (data) {
+                            console.log(data);
+                            if (data.trim() == 'done')
+                            {
+                                swal("login successfully...  We are going to redirect to home page")
+                                        .then((value) => {
+                                            window.location = "index.html"
+                                        });
+                            } else
+                            {
+                                swal(data);
+                            }
+                        },
+                        error: function () {
+                            swal("invalid credentials.. try again");
+                        },
+                        processData: false,
+                        contentType: false
+                    });
+                });
+            });
+        </script>
     </body>
 </html>
 

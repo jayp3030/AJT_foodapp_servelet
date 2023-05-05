@@ -3,11 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/jay/Documents/NetBeansProjects/FoodDemo/web/signup.html</file>
-            <file>file:/C:/Users/jay/Documents/NetBeansProjects/FoodDemo/src/java/com/foodDemo/helper/ConnectionProvider.java</file>
-            <file>file:/C:/Users/jay/Documents/NetBeansProjects/FoodDemo/src/java/com/foodDemo/dao/Userdao.java</file>
-            <file>file:/C:/Users/jay/Documents/NetBeansProjects/FoodDemo/web/index.html</file>
-            <file>file:/C:/Users/jay/Documents/NetBeansProjects/FoodDemo/src/java/com/foodDemo/servelets/signupServelet.java</file>
+            <file>file:/C:/Users/jay/Documents/NetBeansProjects/FoodDemo/src/java/com/foodDemo/servelets/changeOrderServelet.java</file>
+            <file>file:/C:/Users/jay/Documents/NetBeansProjects/FoodDemo/web/placeOrder.html</file>
+            <file>file:/C:/Users/jay/Documents/NetBeansProjects/FoodDemo/src/java/com/foodDemo/dao/FoodOrderdao.java</file>
+            <file>file:/C:/Users/jay/Documents/NetBeansProjects/FoodDemo/src/java/com/foodDemo/etities/FoodOrder.java</file>
+            <file>file:/C:/Users/jay/Documents/NetBeansProjects/FoodDemo/web/changeOrder.html</file>
         </group>
     </open-files>
 </project-private>

@@ -10,18 +10,18 @@ public class ConnectionProvider {
 
         try {
 
-            if (con == null) {
-                // driver class load 
-                Class.forName("com.mysql.jdbc.Driver");
+            // driver class load 
+            Class.forName("com.mysql.cj.jdbc.Driver");
 
-                // creating connection 
-                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/foodapp", "root@localhost", "shadow_ivy3030");
-            }
+            // creating connection 
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/foodapp" ,"root" , "shadow_ivy3030");
+            
 
         } catch (Exception e) {
-            System.out.println(e);
+            
+            e.printStackTrace();
         }
- 
+
         return con;
     }
 

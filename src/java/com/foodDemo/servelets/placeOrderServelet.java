@@ -1,6 +1,7 @@
 package com.foodDemo.servelets;
 
-import com.foodDemo.dao.Userdao;
+import com.foodDemo.dao.FoodOrderdao;
+import com.foodDemo.etities.FoodOrder;
 import com.foodDemo.etities.User;
 import com.foodDemo.helper.ConnectionProvider;
 import java.io.IOException;
@@ -10,38 +11,33 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @MultipartConfig
-public class signupServelet extends HttpServlet {
-    
+public class placeOrderServelet extends HttpServlet {
+
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+
+            String username = request.getParameter("username");
+            String foodItems = request.getParameter("foodItems");
+            String quantity = request.getParameter("quantity");
+            String suggetion = request.getParameter("suggetion");
             
-            String uname = request.getParameter("uname");
-            String uemail = request.getParameter("uemail");
-            String upassword = request.getParameter("upassword");
-            String ucpassword = request.getParameter("ucpassword");
+            FoodOrder order = new FoodOrder(username , foodItems, quantity, suggetion);
             
-            User user = new User(uname, uemail, upassword);
-           
+            FoodOrderdao dao = new FoodOrderdao(ConnectionProvider.getConnection());
             
-            if(!upassword.equals(ucpassword)){
-                out.println("password and confirm password not match");
+            
+            if(dao.saveOrder(order)){
+                out.print("done");
             }
             else{
-                Userdao dao = new Userdao(ConnectionProvider.getConnection());
-//                out.print(dao.saveUser(user));
-                if (dao.saveUser(user)) {
-                    out.print("done");
-                }
-                else{
-                    out.print("error..");
-                }
-                
+                out.print("something went wrong..."); 
             }
-            
         }
     }
 

@@ -4,9 +4,41 @@
         <servlet-name>signupServelet</servlet-name>
         <servlet-class>com.foodDemo.servelets.signupServelet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>loginServelet</servlet-name>
+        <servlet-class>com.foodDemo.servelets.loginServelet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>placeOrderServelet</servlet-name>
+        <servlet-class>com.foodDemo.servelets.placeOrderServelet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>changeOrderServelet</servlet-name>
+        <servlet-class>com.foodDemo.servelets.changeOrderServelet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>cancelOrderServelet</servlet-name>
+        <servlet-class>com.foodDemo.servelets.cancelOrderServelet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>signupServelet</servlet-name>
         <url-pattern>/signupServelet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loginServelet</servlet-name>
+        <url-pattern>/loginServelet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>placeOrderServelet</servlet-name>
+        <url-pattern>/placeOrderServelet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>changeOrderServelet</servlet-name>
+        <url-pattern>/changeOrderServelet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cancelOrderServelet</servlet-name>
+        <url-pattern>/cancelOrderServelet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

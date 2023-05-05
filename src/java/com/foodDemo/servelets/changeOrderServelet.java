@@ -1,7 +1,11 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
 package com.foodDemo.servelets;
 
-import com.foodDemo.dao.Userdao;
-import com.foodDemo.etities.User;
+import com.foodDemo.dao.FoodOrderdao;
+import com.foodDemo.etities.FoodOrder;
 import com.foodDemo.helper.ConnectionProvider;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,37 +15,28 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 @MultipartConfig
-public class signupServelet extends HttpServlet {
-    
+public class changeOrderServelet extends HttpServlet {
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
-            String uname = request.getParameter("uname");
-            String uemail = request.getParameter("uemail");
-            String upassword = request.getParameter("upassword");
-            String ucpassword = request.getParameter("ucpassword");
-            
-            User user = new User(uname, uemail, upassword);
-           
-            
-            if(!upassword.equals(ucpassword)){
-                out.println("password and confirm password not match");
+            String name = request.getParameter("uname");
+            String oldOrder = request.getParameter("oldOrder");
+            String oldQuantity = request.getParameter("oldQuantity");
+            String newOrder = request.getParameter("newOrder");
+            String newQuantity = request.getParameter("newQuantity");
+
+//            FoodOrder order = new FoodOrder(name, newOrder, newQuantity);
+            FoodOrderdao dao = new FoodOrderdao(ConnectionProvider.getConnection());
+
+            if (dao.updateOrder(name, oldOrder, oldQuantity, newOrder, newQuantity)) {
+                out.print("done");
+            } else {
+                out.print("something went wrong....");
             }
-            else{
-                Userdao dao = new Userdao(ConnectionProvider.getConnection());
-//                out.print(dao.saveUser(user));
-                if (dao.saveUser(user)) {
-                    out.print("done");
-                }
-                else{
-                    out.print("error..");
-                }
-                
-            }
-            
         }
     }
 

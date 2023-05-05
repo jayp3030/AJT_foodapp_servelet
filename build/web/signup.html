@@ -11,10 +11,10 @@
     <body>
         <div class="signup">
             <div class="signupInner">
-                <form action="signupServelet" method="post">
+                <form id="signup">
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" name="uname" aria-describedby="emailHelp"/>
+                        <input type="text" class="form-control" id="exampleInputEmail1" name="uname" aria-describedby="emailHelp" minlength="3"/>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email address</label>
@@ -22,24 +22,62 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" class="form-control" name="upassword" id="exampleInputPassword1">
+                        <input type="password" class="form-control" name="upassword" id="exampleInputPassword1" minlength="6"/>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">confirm Password</label>
-                        <input type="password" class="form-control" name="ucpassword" id="exampleInputPassword1">
+                        <input type="password" class="form-control" name="ucpassword" id="exampleInputPassword1" minlength="6"/>
                     </div>
                     <button type="submit" class="btn btn-primary">Sign Up</button>
-                    <br>
-                    <br>
-                    
-                    <!--<p style="text-align: center">already user ? <a><a href="./login.html" target="target">login</a></p>-->
                 </form>
+                <br>
+                <p style="text-align: center">already user ? <a><a href="./login.html">login</a></p>
             </div>
         </div>
 
 
         <script src="./myJs.js"></script>
+        <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
+
+        <<script>
+            $(document).ready(function () {
+                console.log("loaded........")
+                $('#signup').on('submit', function (event) {
+                    event.preventDefault();
+                    let form = new FormData(this);
+                    console.log(form)
+                    //send register servlet:
+                    $.ajax({
+                        url: "signupServelet",
+                        type: 'POST',
+                        data: form,
+                        success: function (data) {
+                            console.log(data);
+                            if (data.trim() == 'done')
+                            {
+                                swal("Registered successfully...  We are going to redirect to login page")
+                                        .then((value) => {
+                                            window.location = "login.html"
+                                        });
+                            } else
+                            {
+                                swal(data);
+                            }
+                        },
+                        error: function () {
+                            swal("something went wrong..try again");
+                        },
+                        processData: false,
+                        contentType: false
+                    });
+                });
+            });
+        </script>
     </body>
 </html>

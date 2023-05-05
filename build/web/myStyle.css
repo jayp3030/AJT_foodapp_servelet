@@ -5,6 +5,9 @@
     text-transform: capitalize;
     font-family: 'Roboto', sans-serif;
 }
+html{
+    scroll-behaviour :smooth;
+}
 .navbar{
     position: fixed!important;
     width: 100%;
@@ -49,40 +52,13 @@
 }
 .orderInner{
     height: fit-content;
-    width: fit-content;
+    width: 25%;
     padding: 25px;
     background:rgba(255,255,255,.15);
 }
-.orderInner form{
-    width: 18rem;
-    display: flex;
-    flex-direction: column;
+.orderInner button{
+    margin: .75rem 0;
 }
-.orderInner form > input{
-    padding: .75rem 1rem;
-    outline: none;
-    border: 1px solid blue;
-    border-radius: 0;
-    margin: .5rem 0;
-}
-/*.btn2{
-    padding: .7rem 2rem;
-    background: blueviolet;
-    outline: none;
-    border: 1px solid transparent;
-    color: white;
-    letter-spacing: 1px;
-    font-size: 1rem;
-    margin-top:1rem;
-    transition: all .3s ease-in-out;
-    
-}
-.btn2:hover{
-    color: blueviolet;
-    background: white;
-    border: 1px solid blueviolet;
-}*/
-
 .login{
     margin: 0 auto;
     width: 30%;

@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
 package com.foodDemo.servelets;
 
 import com.foodDemo.dao.Userdao;
@@ -10,38 +14,30 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 
 @MultipartConfig
-public class signupServelet extends HttpServlet {
-    
+public class loginServelet extends HttpServlet {
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
             
-            String uname = request.getParameter("uname");
-            String uemail = request.getParameter("uemail");
-            String upassword = request.getParameter("upassword");
-            String ucpassword = request.getParameter("ucpassword");
+            Userdao dao = new Userdao(ConnectionProvider.getConnection());
             
-            User user = new User(uname, uemail, upassword);
-           
+            User u = dao.getuserByEmailAndPass(email, password);
             
-            if(!upassword.equals(ucpassword)){
-                out.println("password and confirm password not match");
+            if (u == null) {
+                out.println("invalid credentials...  try again");
+            }else{
+                HttpSession s = request.getSession();
+                s.setAttribute("currentUser", u);
+                out.print("done");
             }
-            else{
-                Userdao dao = new Userdao(ConnectionProvider.getConnection());
-//                out.print(dao.saveUser(user));
-                if (dao.saveUser(user)) {
-                    out.print("done");
-                }
-                else{
-                    out.print("error..");
-                }
-                
-            }
-            
         }
     }
 

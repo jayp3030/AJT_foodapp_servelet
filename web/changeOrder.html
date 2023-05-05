@@ -1,8 +1,7 @@
-<!DOCTYPE html>
 
 <html>
     <head>
-        <title>sigh up</title>
+        <title>Change Order</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="myStyle.css">
@@ -11,30 +10,32 @@
     <body>
         <div class="signup">
             <div class="signupInner">
-                <form id="signup">
+                <form id="changeOrder">
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Name</label>
+                        <label for="exampleInputEmail1" class="form-label">Enter Name</label>
                         <input type="text" class="form-control" id="exampleInputEmail1" name="uname" aria-describedby="emailHelp" minlength="3"/>
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" name="uemail" aria-describedby="emailHelp"/>
+                        <label for="exampleInputEmail1" class="form-label">Enter previous order item</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" name="oldOrder" aria-describedby="emailHelp" minlength="3" placeholder="ex - pizza,burger"/>
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" class="form-control" name="upassword" id="exampleInputPassword1" minlength="6"/>
+                        <label for="exampleInputEmail1" class="form-label">Enter quantity</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" name="oldQuantity" aria-describedby="emailHelp" placeholder="ex - 3,4"/>
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">confirm Password</label>
-                        <input type="password" class="form-control" name="ucpassword" id="exampleInputPassword1" minlength="6"/>
+                        <label for="exampleInputPassword1" class="form-label">Enter new Item</label>
+                        <input type="text" class="form-control" name="newOrder" id="exampleInputPassword1" placeholder="ex - pizza,burger"/>
                     </div>
-                    <button type="submit" class="btn btn-primary">Sign Up</button>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Enter new quantity</label>
+                        <input type="text" class="form-control" name="newQuantity" id="exampleInputPassword1"  placeholder="ex - 2,1"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Change Order</button>
                 </form>
                 <br>
-                <p style="text-align: center">already user ? <a><a href="./login.html">login</a></p>
             </div>
         </div>
-
 
         <script src="./myJs.js"></script>
         <script
@@ -48,22 +49,22 @@
         <<script>
             $(document).ready(function () {
                 console.log("loaded........")
-                $('#signup').on('submit', function (event) {
+                $('#changeOrder').on('submit', function (event) {
                     event.preventDefault();
                     let form = new FormData(this);
                     console.log(form)
                     //send register servlet:
                     $.ajax({
-                        url: "signupServelet",
+                        url: "changeOrderServelet",
                         type: 'POST',
                         data: form,
                         success: function (data) {
                             console.log(data);
                             if (data.trim() == 'done')
                             {
-                                swal("Registered successfully...  We are going to redirect to login page")
-                                        .then((value) => {
-                                            window.location = "login.html"
+                                swal(`Ordered changed successfully...`)
+                                        .then(() => {
+                                            window.location = "index.html"
                                         });
                             } else
                             {
@@ -79,5 +80,6 @@
                 });
             });
         </script>
+
     </body>
 </html>
